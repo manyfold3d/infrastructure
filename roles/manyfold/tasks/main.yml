@@ -1,0 +1,56 @@
+---
+- name: Create folders
+  ansible.builtin.file:
+    path: /home/manyfold/{{ item }}
+    owner: manyfold
+    group: manyfold
+    state: directory
+    mode: '0775'
+  loop:
+    - libraries
+    - sys-tmp
+    - app-tmp
+    - log
+
+- name: Manyfold
+  community.docker.docker_container:
+    name: manyfold
+    image: "ghcr.io/manyfold3d/manyfold-solo:latest"
+    pull: yes
+    network_mode: host
+    restart_policy: unless-stopped
+    env:
+      PUID: "{{ getent_passwd['manyfold'][1] }}"
+      PGID: "{{ getent_passwd['manyfold'][2] }}"
+      SECRET_KEY_BASE: "{{ lookup('password', '/dev/null chars=ascii_lowercase,digits length=64') }}"
+    read_only: true
+    security_opts:
+     - no-new-privileges:true
+    cap_drop:
+      - ALL
+    capabilities:
+      - CHOWN
+      - DAC_OVERRIDE
+      - SETGID
+      - SETUID
+      - SYS_ADMIN
+    mounts:
+      - type: bind
+        source: /home/manyfold/libraries
+        target: /libraries
+        read_only: false
+      - type: bind
+        source: /home/manyfold/sys-tmp
+        target: /tmp
+        read_only: false
+      - type: bind
+        source: /home/manyfold/app-tmp
+        target: /usr/src/app/tmp
+        read_only: false
+      - type: bind
+        source: /home/manyfold/log
+        target: /usr/src/app/log
+        read_only: false
+      - type: tmpfs
+        target: /run
+        read_only: false
