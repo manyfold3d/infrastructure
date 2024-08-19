@@ -14,3 +14,14 @@
           authorized_keys:
           - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINCvCQlRUXmMiAdN0pzqpmAULLaEuVt3dzL0xEc8ZyKc"
     - role: geerlingguy.security
+
+- name: Set up Manyfold
+  hosts: [try]
+  tags: [manyfold]
+  remote_user: ansible
+  port: "{{security_ssh_port}}"
+  become: yes
+  roles:
+    - role: robertdebock.users
+      users:
+        - name: manyfold
