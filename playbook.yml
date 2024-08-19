@@ -25,3 +25,4 @@
     - role: robertdebock.users
       users:
         - name: manyfold
+    - role: geerlingguy.pip
