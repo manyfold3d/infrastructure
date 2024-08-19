@@ -6,6 +6,7 @@
   gather_facts: no
   roles:
     - role: robertdebock.bootstrap
+    - role: robertdebock.hostname
     - role: robertdebock.users
       users:
         - name: ansible

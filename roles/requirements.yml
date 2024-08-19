@@ -1,4 +1,5 @@
 ---
 - robertdebock.bootstrap
+- robertdebock.hostname
 - robertdebock.users
 - geerlingguy.security
