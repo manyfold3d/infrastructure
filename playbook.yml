@@ -10,6 +10,6 @@
       users:
         - name: ansible
           comment: Ansible login for use after root SSH is disabled
-          sudo_options: "ALL=(ALL) NOPASSWD: ALL"
           authorized_keys:
           - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINCvCQlRUXmMiAdN0pzqpmAULLaEuVt3dzL0xEc8ZyKc"
+    - role: geerlingguy.security
