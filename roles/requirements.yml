@@ -2,6 +2,7 @@
 - robertdebock.bootstrap
 - robertdebock.hostname
 - robertdebock.users
+- geerlingguy.swap
 - geerlingguy.security
 - geerlingguy.pip
 - geerlingguy.docker

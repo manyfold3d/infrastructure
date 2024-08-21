@@ -1,6 +1,11 @@
 ---
+# geerlingguy.swap
+swap_file_size_mb: "{{ ansible_memtotal_mb | string }}"
+# geerlingguy.security
+security_autoupdate_reboot: true
 security_ssh_port: 9473
 security_ssh_allowed_users: [ "ansible" ]
 security_sudoers_passwordless: [ "ansible" ]
+# geerlingguy.pip
 pip_install_packages:
   - name: docker
