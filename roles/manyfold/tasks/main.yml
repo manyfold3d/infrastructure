@@ -23,6 +23,8 @@
       PUID: "{{ getent_passwd['manyfold'][1] }}"
       PGID: "{{ getent_passwd['manyfold'][2] }}"
       SECRET_KEY_BASE: "{{ lookup('password', '/dev/null chars=ascii_lowercase,digits length=64') }}"
+      PUBLIC_HOSTNAME: "try.manyfold.app"
+      PUBLIC_PORT: "443"
     read_only: true
     security_opts:
      - no-new-privileges:true
