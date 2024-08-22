@@ -6,12 +6,15 @@
   gather_facts: no
   roles:
     - role: robertdebock.bootstrap
+    - role: robertdebock.hostname
+    - role: geerlingguy.swap
     - role: robertdebock.users
       users:
         - name: ansible
           comment: Ansible login for use after root SSH is disabled
           authorized_keys:
           - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINCvCQlRUXmMiAdN0pzqpmAULLaEuVt3dzL0xEc8ZyKc"
+    - role: geerlingguy.security
 
 - name: Set up Manyfold
   hosts: [try]
@@ -20,9 +23,6 @@
   port: "{{security_ssh_port}}"
   become: yes
   roles:
-    - role: robertdebock.hostname
-    - role: geerlingguy.security
-    - role: geerlingguy.swap
     - role: robertdebock.users
       users:
         - name: manyfold
