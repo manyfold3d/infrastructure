@@ -1,0 +1,6 @@
+try.manyfold.app {
+	reverse_proxy {
+		to manyfold:3214
+		health_uri /health
+	}
+}

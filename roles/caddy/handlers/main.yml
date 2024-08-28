@@ -1,0 +1,4 @@
+- name: reload caddy
+  community.docker.docker_container_exec:
+    container: caddy
+    command: caddy reload

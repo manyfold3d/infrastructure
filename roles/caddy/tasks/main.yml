@@ -1,0 +1,37 @@
+---
+- name: Create folders
+  ansible.builtin.file:
+    path: /home/caddy/{{ item }}
+    owner: caddy
+    group: caddy
+    state: directory
+    mode: '0775'
+  loop:
+    - config
+    - data
+- name: Copy Caddyfile
+  ansible.builtin.copy:
+    src: Caddyfile
+    dest: "/home/caddy/config/Caddyfile"
+    owner: caddy
+    group: caddy
+    mode: 0644
+  notify: reload caddy
+- name: Caddy
+  community.docker.docker_container:
+    name: caddy
+    image: caddy:latest
+    capabilities:
+      - NET_ADMIN
+    ports:
+      - 80:80
+      - 443:443
+    mounts:
+      - type: bind
+        target: /etc/caddy
+        source: "/home/caddy/config"
+      - type: bind
+        target: /data
+        source: "/home/caddy/data"
+    networks:
+      - name: "manyfold"
