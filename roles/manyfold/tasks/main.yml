@@ -13,12 +13,16 @@
     - app-tmp
     - log
 
+- name: Manyfold Network
+  community.docker.docker_network:
+    name: manyfold
+    enable_ipv6: true
+
 - name: Manyfold
   community.docker.docker_container:
     name: manyfold
     image: "ghcr.io/manyfold3d/manyfold-solo:latest"
     pull: yes
-    network_mode: host
     restart_policy: unless-stopped
     env:
       PUID: "{{ getent_passwd['manyfold'][1] }}"
@@ -62,3 +66,5 @@
         source: /home/manyfold/log
         target: /usr/src/app/log
         read_only: false
+    networks:
+      - name: "manyfold"
