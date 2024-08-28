@@ -27,4 +27,5 @@
       users:
         - name: manyfold
     - role: geerlingguy.pip
+    - role: docker-maintenance
     - role: manyfold

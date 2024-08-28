@@ -2,6 +2,7 @@
 - robertdebock.bootstrap
 - robertdebock.hostname
 - robertdebock.users
+- robertdebock.cron
 - geerlingguy.swap
 - geerlingguy.security
 - geerlingguy.pip

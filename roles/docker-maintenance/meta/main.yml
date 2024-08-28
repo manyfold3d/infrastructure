@@ -1,0 +1,4 @@
+---
+dependencies:
+  - role: robertdebock.cron
+  - role: geerlingguy.docker

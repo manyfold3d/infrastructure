@@ -1,0 +1,17 @@
+---
+- name: Regularly prune dangling docker stuff
+  ansible.builtin.cron:
+    minute: 0
+    hour: 3
+    job: "/usr/bin/docker system prune -f"
+    name: prune
+- name: Watchtower
+  community.docker.docker_container:
+    name: watchtower
+    image: containrrr/watchtower
+    network_mode: host
+    restart_policy: unless-stopped
+    env:
+      WATCHTOWER_SCHEDULE: "0 0 4 * * *"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
