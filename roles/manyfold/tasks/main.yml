@@ -8,6 +8,7 @@
     mode: '0775'
   loop:
     - libraries
+    - config
     - sys-tmp
     - app-tmp
     - log
@@ -37,6 +38,10 @@
       - SETUID
       - SYS_ADMIN
     mounts:
+      - type: bind
+        source: /home/manyfold/config
+        target: /config
+        read_only: false
       - type: bind
         source: /home/manyfold/libraries
         target: /libraries
