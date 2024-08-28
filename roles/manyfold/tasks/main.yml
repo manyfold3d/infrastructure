@@ -37,6 +37,8 @@
       - SETGID
       - SETUID
       - SYS_ADMIN
+    tmpfs:
+      - /run:exec
     mounts:
       - type: bind
         source: /home/manyfold/config
@@ -57,7 +59,4 @@
       - type: bind
         source: /home/manyfold/log
         target: /usr/src/app/log
-        read_only: false
-      - type: tmpfs
-        target: /run
         read_only: false
