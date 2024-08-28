@@ -26,6 +26,8 @@
       SECRET_KEY_BASE: "{{ lookup('password', '/dev/null chars=ascii_lowercase,digits length=64') }}"
       PUBLIC_HOSTNAME: "try.manyfold.app"
       PUBLIC_PORT: "443"
+      DEMO_MODE: "enabled"
+      FEDERATION: "enabled"
     read_only: true
     security_opts:
      - no-new-privileges:true
