@@ -32,6 +32,7 @@
       PUBLIC_PORT: "443"
       DEMO_MODE: "enabled"
       FEDERATION: "enabled"
+      HTTPS_ONLY: "enabled"
     read_only: true
     security_opts:
      - no-new-privileges:true
