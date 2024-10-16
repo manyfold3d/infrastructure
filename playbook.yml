@@ -26,4 +26,5 @@
     - role: geerlingguy.pip
     - role: docker-maintenance
     - role: manyfold
+    - role: tracking
     - role: caddy

@@ -4,3 +4,10 @@ try.manyfold.app {
 		health_uri /health
 	}
 }
+
+tracking.manyfold.app {
+	reverse_proxy {
+		to tracking:9292
+		health_uri /stats
+	}
+}

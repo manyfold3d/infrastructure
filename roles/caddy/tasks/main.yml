@@ -35,3 +35,4 @@
         source: "/home/caddy/data"
     networks:
       - name: "manyfold"
+      - name: "tracking"

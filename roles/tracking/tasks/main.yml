@@ -1,0 +1,28 @@
+---
+- name: Tracking Network
+  community.docker.docker_network:
+    name: tracking
+    enable_ipv6: true
+
+- name: Tracking
+  community.docker.docker_container:
+    name: tracking
+    image: "ghcr.io/manyfold3d/tracking:edge"
+    pull: yes
+    restart_policy: unless-stopped
+    env:
+    read_only: true
+    security_opts:
+     - no-new-privileges:true
+    cap_drop:
+      - ALL
+    capabilities:
+      - CHOWN
+      - DAC_OVERRIDE
+      - SETGID
+      - SETUID
+      - SYS_ADMIN
+    tmpfs:
+      - /run:exec
+    networks:
+      - name: "tracking"
