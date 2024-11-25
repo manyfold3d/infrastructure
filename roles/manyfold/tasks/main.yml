@@ -33,6 +33,8 @@
       DEMO_MODE: "enabled"
       FEDERATION: "enabled"
       HTTPS_ONLY: "enabled"
+      SITE_NAME: "Try Manyfold"
+      SITE_TAGLINE: "The official Manyfold demo instance"
     read_only: true
     security_opts:
      - no-new-privileges:true
