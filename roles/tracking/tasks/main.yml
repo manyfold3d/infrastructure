@@ -11,7 +11,7 @@
     pull: yes
     restart_policy: unless-stopped
     env:
-    read_only: true
+    read_only: false
     security_opts:
      - no-new-privileges:true
     cap_drop:
