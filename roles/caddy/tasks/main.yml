@@ -21,6 +21,8 @@
   community.docker.docker_container:
     name: caddy
     image: caddy:latest
+    pull: yes
+    restart_policy: unless-stopped
     capabilities:
       - NET_ADMIN
     ports:
