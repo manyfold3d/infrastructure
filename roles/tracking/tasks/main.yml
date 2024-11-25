@@ -10,6 +10,7 @@
     image: "ghcr.io/manyfold3d/tracking:edge"
     pull: yes
     restart_policy: unless-stopped
+    log_driver: none
     env:
     read_only: false
     security_opts:
