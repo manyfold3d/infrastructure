@@ -53,7 +53,6 @@
   roles:
     - role: manyfold
 
-
 - name: Set up Manyfold Solo
   hosts: [try]
   remote_user: ansible
@@ -61,3 +60,19 @@
   become: yes
   roles:
     - role: manyfold-solo
+
+- name: Set up database server
+  hosts: [db]
+  remote_user: ansible
+  port: "{{security_ssh_port}}"
+  become: yes
+  roles:
+    - postgresql
+
+- name: Set up cache server
+  hosts: [cache]
+  remote_user: ansible
+  port: "{{security_ssh_port}}"
+  become: yes
+  roles:
+    - valkey
