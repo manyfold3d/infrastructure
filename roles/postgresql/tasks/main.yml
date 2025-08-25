@@ -13,6 +13,7 @@
     restart_policy: unless-stopped
     networks:
       - name: manyfold
+      - name: fediscoverer
     env:
       POSTGRES_USER: "{{ postgres_username }}"
       POSTGRES_PASSWORD: "{{ postgres_password }}"

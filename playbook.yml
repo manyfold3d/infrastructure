@@ -26,6 +26,10 @@
     community.docker.docker_network:
       name: manyfold
       enable_ipv6: true
+  - name: Fediscoverer Network
+    community.docker.docker_network:
+      name: fediscoverer
+      enable_ipv6: true
   roles:
     - role: docker-maintenance
 
