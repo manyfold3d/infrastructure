@@ -20,7 +20,7 @@
 
 - name: Manyfold
   community.docker.docker_container:
-    name: manyfold
+    name: manyfold-solo
     image: "ghcr.io/manyfold3d/manyfold-solo:latest"
     pull: yes
     restart_policy: unless-stopped
