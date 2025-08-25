@@ -1,6 +1,6 @@
 
 PLAYBOOK_CMD= ansible-playbook
-ANSIBLE_ARGS= -f 10 playbook.yml
+ANSIBLE_ARGS= --vault-password-file vault_password.txt -f 10 playbook.yml
 
 all:
 	${PLAYBOOK_CMD} ${ANSIBLE_ARGS} --skip-tags bootstrap

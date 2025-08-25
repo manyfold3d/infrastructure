@@ -16,6 +16,18 @@
           - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINCvCQlRUXmMiAdN0pzqpmAULLaEuVt3dzL0xEc8ZyKc"
     - role: geerlingguy.security
 
+- name: Configure base requirements
+  hosts: all
+  remote_user: ansible
+  port: "{{security_ssh_port}}"
+  become: yes
+  tasks:
+  - name: Manyfold Network
+    community.docker.docker_network:
+      name: manyfold
+      enable_ipv6: true
+  roles:
+    - role: docker-maintenance
 - name: Set up Manyfold
   hosts: [try]
   tags: [manyfold]
@@ -23,8 +35,6 @@
   port: "{{security_ssh_port}}"
   become: yes
   roles:
-    - role: geerlingguy.pip
-    - role: docker-maintenance
     - role: manyfold
     - role: tracking
     - role: caddy
