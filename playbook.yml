@@ -28,13 +28,27 @@
       enable_ipv6: true
   roles:
     - role: docker-maintenance
+
+- name: Set up Caddy frontend
+  hosts: [lb]
+  remote_user: ansible
+  port: "{{security_ssh_port}}"
+  become: yes
+  roles:
+    - role: caddy
+
+- name: Set up Caddy frontend
+  hosts: [tracker]
+  remote_user: ansible
+  port: "{{security_ssh_port}}"
+  become: yes
+  roles:
+    - role: tracking
+
 - name: Set up Manyfold
-  hosts: [try]
-  tags: [manyfold]
+  hosts: [app]
   remote_user: ansible
   port: "{{security_ssh_port}}"
   become: yes
   roles:
     - role: manyfold
-    - role: tracking
-    - role: caddy
