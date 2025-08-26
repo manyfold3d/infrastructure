@@ -1,0 +1,14 @@
+---
+- name: Fediscoverer
+  community.docker.docker_container:
+    name: fediscoverer
+    image: ghcr.io/mastodon/fediscoverer:latest
+    pull: yes
+    restart_policy: unless-stopped
+    env:
+      SECRET_KEY_BASE: "{{ fediscoverer_secret_key_base }}"
+      FEDISCOVERER_DATABASE_PASSWORD: "{{ fediscoverer_database_password }}"
+      DATABASE_URL: postgresql://postgresql
+      DOMAIN: "{{ fediscoverer_hostname }}"
+    networks:
+      - name: fediscoverer
