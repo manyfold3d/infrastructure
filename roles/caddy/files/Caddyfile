@@ -1,5 +1,12 @@
 try.manyfold.app {
 	reverse_proxy {
+		to manyfold-solo:3214
+		health_uri /health
+	}
+}
+
+3dprint.social {
+	reverse_proxy {
 		to manyfold:3214
 		health_uri /health
 	}

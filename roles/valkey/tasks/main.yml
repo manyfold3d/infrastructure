@@ -1,0 +1,10 @@
+---
+- name: Valkey
+  community.docker.docker_container:
+    name: valkey
+    image: "valkey/valkey:8-alpine"
+    pull: yes
+    restart_policy: unless-stopped
+    command: "valkey-server --save \"\""
+    networks:
+      - name: "manyfold"

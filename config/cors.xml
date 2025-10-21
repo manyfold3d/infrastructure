@@ -1,0 +1,8 @@
+<CORSConfiguration>
+   <CORSRule>
+      <AllowedOrigin>https://3dprint.social</AllowedOrigin>
+      <AllowedMethod>GET</AllowedMethod>
+      <AllowedMethod>HEAD</AllowedMethod>
+      <AllowedHeader>*</AllowedHeader>
+   </CORSRule>
+</CORSConfiguration>

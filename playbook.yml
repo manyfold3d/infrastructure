@@ -16,15 +16,63 @@
           - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINCvCQlRUXmMiAdN0pzqpmAULLaEuVt3dzL0xEc8ZyKc"
     - role: geerlingguy.security
 
-- name: Set up Manyfold
-  hosts: [try]
-  tags: [manyfold]
+- name: Configure base requirements
+  hosts: all
+  remote_user: ansible
+  port: "{{security_ssh_port}}"
+  become: yes
+  tasks:
+  - name: Manyfold Network
+    community.docker.docker_network:
+      name: manyfold
+      enable_ipv6: true
+  roles:
+    - role: docker-maintenance
+
+- name: Set up Caddy frontend
+  hosts: [lb]
   remote_user: ansible
   port: "{{security_ssh_port}}"
   become: yes
   roles:
-    - role: geerlingguy.pip
-    - role: docker-maintenance
-    - role: manyfold
-    - role: tracking
     - role: caddy
+
+- name: Set up Caddy frontend
+  hosts: [tracker]
+  remote_user: ansible
+  port: "{{security_ssh_port}}"
+  become: yes
+  roles:
+    - role: tracking
+
+- name: Set up Manyfold
+  hosts: [app]
+  remote_user: ansible
+  port: "{{security_ssh_port}}"
+  become: yes
+  roles:
+    - role: manyfold
+
+- name: Set up Manyfold Solo
+  hosts: [try]
+  remote_user: ansible
+  port: "{{security_ssh_port}}"
+  become: yes
+  roles:
+    - role: manyfold-solo
+
+- name: Set up database server
+  hosts: [db]
+  remote_user: ansible
+  port: "{{security_ssh_port}}"
+  become: yes
+  roles:
+    - postgresql
+
+- name: Set up cache server
+  hosts: [cache]
+  remote_user: ansible
+  port: "{{security_ssh_port}}"
+  become: yes
+  roles:
+    - valkey

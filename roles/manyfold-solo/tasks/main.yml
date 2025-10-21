@@ -7,35 +7,34 @@
     state: directory
     mode: '0775'
   loop:
+    - libraries
     - config
+    - sys-tmp
+    - app-tmp
     - log
-    - storage/app-tmp
-    - storage/libraries
-    - storage/sys-tmp
+
+- name: Manyfold Network
+  community.docker.docker_network:
+    name: manyfold
+    enable_ipv6: true
 
 - name: Manyfold
   community.docker.docker_container:
-    name: manyfold
-    image: "ghcr.io/manyfold3d/manyfold:latest"
+    name: manyfold-solo
+    image: "ghcr.io/manyfold3d/manyfold-solo:latest"
     pull: yes
     restart_policy: unless-stopped
     env:
       PUID: "{{ getent_passwd['manyfold'][1] }}"
       PGID: "{{ getent_passwd['manyfold'][2] }}"
-      DATABASE_URL: postgresql://{{ postgres_username }}:{{ postgres_password }}@postgresql/{{ postgres_database }}
-      REDIS_URL: redis://valkey:6379
-      SECRET_KEY_BASE: "{{ secret_key_base }}"
-      PUBLIC_HOSTNAME: "{{ public_hostname }}"
+      SECRET_KEY_BASE: "{{ lookup('password', '/dev/null chars=ascii_lowercase,digits length=64') }}"
+      PUBLIC_HOSTNAME: "try.manyfold.app"
       PUBLIC_PORT: "443"
-      MULTIUSER: "enabled"
+      DEMO_MODE: "enabled"
       FEDERATION: "enabled"
       HTTPS_ONLY: "enabled"
-      WEB_CONCURRENCY: "8"
-      DEFAULT_WORKER_CONCURRENCY: "32"
-      SMTP_USERNAME: "{{ smtp_username }}"
-      SMTP_PASSWORD: "{{ smtp_password }}"
-      SMTP_SERVER: "{{ smtp_server }}"
-      MANYFOLD_LOG_LEVEL: debug
+      SITE_NAME: "Try Manyfold"
+      SITE_TAGLINE: "The official Manyfold demo instance"
     read_only: true
     security_opts:
      - no-new-privileges:true
@@ -55,15 +54,15 @@
         target: /config
         read_only: false
       - type: bind
-        source: /home/manyfold/storage/libraries
+        source: /home/manyfold/libraries
         target: /libraries
         read_only: false
       - type: bind
-        source: /home/manyfold/storage/sys-tmp
+        source: /home/manyfold/sys-tmp
         target: /tmp
         read_only: false
       - type: bind
-        source: /home/manyfold/storage/app-tmp
+        source: /home/manyfold/app-tmp
         target: /usr/src/app/tmp
         read_only: false
       - type: bind

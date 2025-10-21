@@ -1,0 +1,6 @@
+---
+dependencies:
+  - role: robertdebock.users
+    users:
+      - name: manyfold
+  - role: geerlingguy.docker
