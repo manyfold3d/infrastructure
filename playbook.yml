@@ -52,3 +52,12 @@
   become: yes
   roles:
     - role: manyfold
+
+
+- name: Set up Manyfold Solo
+  hosts: [try]
+  remote_user: ansible
+  port: "{{security_ssh_port}}"
+  become: yes
+  roles:
+    - role: manyfold-solo

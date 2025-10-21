@@ -1,8 +1,12 @@
 [lb]
 threedpsocial01.vs.mythic-beasts.com
+manyfold01.vs.mythic-beasts.com
 
 [app]
 threedpsocial01.vs.mythic-beasts.com
+
+[try]
+manyfold01.vs.mythic-beasts.com
 
 [db]
 threedpsocial01.vs.mythic-beasts.com
@@ -11,4 +15,4 @@ threedpsocial01.vs.mythic-beasts.com
 threedpsocial01.vs.mythic-beasts.com
 
 [tracker]
-threedpsocial01.vs.mythic-beasts.com
+manyfold01.vs.mythic-beasts.com
