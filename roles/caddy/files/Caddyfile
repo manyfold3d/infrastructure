@@ -18,3 +18,9 @@ tracking.manyfold.app {
 		health_uri /stats
 	}
 }
+
+search.3dprint.social {
+	reverse_proxy {
+		to fediscoverer:3000
+	}
+}

@@ -1,0 +1,6 @@
+---
+dependencies:
+  - role: robertdebock.users
+    users:
+      - name: fediscoverer
+  - role: geerlingguy.docker

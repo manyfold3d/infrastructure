@@ -26,6 +26,10 @@
     community.docker.docker_network:
       name: manyfold
       enable_ipv6: true
+  - name: Fediscoverer Network
+    community.docker.docker_network:
+      name: fediscoverer
+      enable_ipv6: true
   roles:
     - role: docker-maintenance
 
@@ -37,7 +41,7 @@
   roles:
     - role: caddy
 
-- name: Set up Caddy frontend
+- name: Set up tracking app
   hosts: [tracker]
   remote_user: ansible
   port: "{{security_ssh_port}}"
@@ -52,6 +56,7 @@
   become: yes
   roles:
     - role: manyfold
+    - role: fediscoverer
 
 - name: Set up Manyfold Solo
   hosts: [try]
@@ -60,6 +65,7 @@
   become: yes
   roles:
     - role: manyfold-solo
+
 
 - name: Set up database server
   hosts: [db]

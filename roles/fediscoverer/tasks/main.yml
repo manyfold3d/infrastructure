@@ -1,0 +1,31 @@
+---
+- name: Fediscoverer
+  community.docker.docker_container:
+    name: fediscoverer
+    image: ghcr.io/manyfold3d/fediscoverer:latest
+    pull: yes
+    restart_policy: unless-stopped
+    env:
+      SECRET_KEY_BASE: "{{ fediscoverer_secret_key_base }}"
+      FEDISCOVERER_DATABASE_PASSWORD: "{{ fediscoverer_database_password }}"
+      DATABASE_URL: postgresql://postgresql
+      DOMAIN: "{{ fediscoverer_hostname }}"
+      FASP_NAME: "{{ fediscoverer_hostname }}"
+      CONTACT_EMAIL: "{{ fediscoverer_contact_email }}"
+      FEDIVERSE_ACCOUNT: "{{ fediscoverer_fediverse_account }}"
+    networks:
+      - name: fediscoverer
+- name: Fediscoverer Worker
+  community.docker.docker_container:
+    name: fediscoverer_worker
+    image: ghcr.io/mastodon/fediscoverer:latest
+    pull: yes
+    restart_policy: unless-stopped
+    command: "bin/jobs"
+    env:
+      SECRET_KEY_BASE: "{{ fediscoverer_secret_key_base }}"
+      FEDISCOVERER_DATABASE_PASSWORD: "{{ fediscoverer_database_password }}"
+      DATABASE_URL: postgresql://postgresql
+      DOMAIN: "{{ fediscoverer_hostname }}"
+    networks:
+      - name: fediscoverer

@@ -13,11 +13,22 @@
     restart_policy: unless-stopped
     networks:
       - name: manyfold
+      - name: fediscoverer
     env:
       POSTGRES_USER: "{{ postgres_username }}"
       POSTGRES_PASSWORD: "{{ postgres_password }}"
     command: "postgres -c max_connections=200 -c shared_buffers=1536MB -c effective_cache_size=4608MB -c maintenance_work_mem=384MB -c checkpoint_completion_target=0.9 -c wal_buffers=16MB -c default_statistics_target=100 -c random_page_cost=4 -c effective_io_concurrency=2 -c work_mem=7561kB -c huge_pages=off -c min_wal_size=1GB -c max_wal_size=4GB"
+    published_ports: 5432:12514
     mounts:
     - type: bind
       source: "/home/postgres/manyfold"
       target: /var/lib/postgresql/data
+# - name: Create fediscoverer database config
+#   community.docker.docker_container_exec:
+#     container: postgresql
+#     command: psql -v ON_ERROR_STOP=1 --username "{{ postgres_username }}" -c "{{ item }}"
+#   loop:
+#     - CREATE USER {{ fediscoverer_database_username }} WITH PASSWORD '{{ fediscoverer_database_password }}';
+#     - CREATE DATABASE fediscoverer_production OWNER {{ fediscoverer_database_username }};
+#     - CREATE DATABASE fediscoverer_production_cache OWNER {{ fediscoverer_database_username }};
+#     - CREATE DATABASE fediscoverer_production_queue OWNER {{ fediscoverer_database_username }};
