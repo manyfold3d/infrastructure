@@ -15,3 +15,9 @@ install:
 
 bootstrap:
 		${PLAYBOOK_CMD} ${ANSIBLE_ARGS} -t bootstrap
+
+3dps:
+	${PLAYBOOK_CMD} ${ANSIBLE_ARGS} --skip-tags bootstrap -l threedpsocial01.vs.mythic-beasts.com
+
+try:
+	${PLAYBOOK_CMD} ${ANSIBLE_ARGS} --skip-tags bootstrap -l manyfold01.vs.mythic-beasts.com
