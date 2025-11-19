@@ -30,6 +30,10 @@
     community.docker.docker_network:
       name: fediscoverer
       enable_ipv6: true
+  - name: Tracking Network
+    community.docker.docker_network:
+      name: tracking
+      enable_ipv6: true
   roles:
     - role: docker-maintenance
 
