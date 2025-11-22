@@ -31,7 +31,7 @@
       PUBLIC_HOSTNAME: "try.manyfold.app"
       PUBLIC_PORT: "443"
       DEMO_MODE: "enabled"
-      FEDERATION: "enabled"
+      FEDERATION: "disabled"
       HTTPS_ONLY: "enabled"
       SITE_NAME: "Try Manyfold"
       SITE_TAGLINE: "The official Manyfold demo instance"
