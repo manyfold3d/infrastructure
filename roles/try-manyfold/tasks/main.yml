@@ -1,9 +1,9 @@
 ---
 - name: Create folders
   ansible.builtin.file:
-    path: /home/manyfold/{{ item }}
-    owner: manyfold
-    group: manyfold
+    path: /home/try/{{ item }}
+    owner: try
+    group: try
     state: directory
     mode: '0775'
   loop:
@@ -15,26 +15,23 @@
 
 - name: Manyfold Network
   community.docker.docker_network:
-    name: manyfold
+    name: try-manyfold
     enable_ipv6: true
 
 - name: Manyfold
   community.docker.docker_container:
-    name: manyfold-solo
+    name: try-manyfold
     image: "ghcr.io/manyfold3d/manyfold-solo:latest"
     pull: yes
     restart_policy: unless-stopped
     env:
-      PUID: "{{ getent_passwd['manyfold'][1] }}"
-      PGID: "{{ getent_passwd['manyfold'][2] }}"
+      PUID: "{{ getent_passwd['try'][1] }}"
+      PGID: "{{ getent_passwd['try'][2] }}"
       SECRET_KEY_BASE: "{{ lookup('password', '/dev/null chars=ascii_lowercase,digits length=64') }}"
       PUBLIC_HOSTNAME: "try.manyfold.app"
       PUBLIC_PORT: "443"
-      DEMO_MODE: "enabled"
-      FEDERATION: "disabled"
+      DEMO_MODE: "disabled"
       HTTPS_ONLY: "enabled"
-      SITE_NAME: "Try Manyfold"
-      SITE_TAGLINE: "The official Manyfold demo instance"
     read_only: true
     security_opts:
      - no-new-privileges:true
@@ -50,24 +47,24 @@
       - /run:exec
     mounts:
       - type: bind
-        source: /home/manyfold/config
+        source: /home/try/config
         target: /config
         read_only: false
       - type: bind
-        source: /home/manyfold/libraries
+        source: /home/try/libraries
         target: /libraries
         read_only: false
       - type: bind
-        source: /home/manyfold/sys-tmp
+        source: /home/try/sys-tmp
         target: /tmp
         read_only: false
       - type: bind
-        source: /home/manyfold/app-tmp
+        source: /home/try/app-tmp
         target: /usr/src/app/tmp
         read_only: false
       - type: bind
-        source: /home/manyfold/log
+        source: /home/try/log
         target: /usr/src/app/log
         read_only: false
     networks:
-      - name: "manyfold"
+      - name: "try-manyfold"

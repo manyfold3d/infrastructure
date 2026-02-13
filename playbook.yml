@@ -62,13 +62,13 @@
     - role: manyfold
     - role: fediscoverer
 
-- name: Set up Manyfold Solo
+- name: Set up Try Manyfold
   hosts: [try]
   remote_user: ansible
   port: "{{security_ssh_port}}"
   become: yes
   roles:
-    - role: manyfold-solo
+    - role: try-manyfold
 
 
 - name: Set up database server
