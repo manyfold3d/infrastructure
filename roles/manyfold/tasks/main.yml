@@ -16,7 +16,7 @@
 - name: Manyfold
   community.docker.docker_container:
     name: manyfold
-    image: "ghcr.io/manyfold3d/manyfold:latest"
+    image: "manyfold3d/manyfold:latest"
     pull: yes
     restart_policy: unless-stopped
     env:
