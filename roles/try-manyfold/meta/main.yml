@@ -1,6 +1,0 @@
----
-dependencies:
-  - role: robertdebock.users
-    users:
-      - name: try
-  - role: geerlingguy.docker
